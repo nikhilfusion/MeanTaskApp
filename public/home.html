@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Contact List App</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>DOB</th>
+        <th>Gender</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input class="form-control" ng-model="user.name"></td>
+        <td><input class="form-control" ng-model="user.email"></td>
+        <td><input class="form-control" placeholder="eg: 01/01/1998" ng-model="user.dob"></td>
+        <td>
+          <select class="form-control" ng-model="user.gender" ng-init="user.gender='M'">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </td>
+        <td><button class="btn btn-primary" ng-click="addUser(user)">Add User</button></td>
+      </tr>
+      <tr ng-repeat="user in userList">
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.dob}}</td>
+      <td>{{user.gender}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div> 
