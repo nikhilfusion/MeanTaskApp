@@ -23,39 +23,39 @@ describe('employer', function() {
       res.body.should.be.a('array');
       done();
     });
-  });  
+  });
+  it('should add a SINGLE user on /user POST', function(done) {
+    var uniqueString = new Date().getTime();
+    chai.request(server)
+      .post('/user')
+      .send({
+        'name': 'Nikhil', 
+        'email': 'nikhil' + uniqueString + '@mailinator.com', 
+        'dob': '24/02/1989',
+        'gender': 'M',
+        'is_verified': false,
+        'del_flg': false  
+      })
+      .end(function(err, res){
+        console.log("err", err);
+        res.should.have.status(200);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('name');
+        res.body.should.have.property('email');
+        res.body.should.have.property('dob');
+        res.body.should.have.property('gender');
+        res.body.should.have.property('is_verified');
+        res.body.should.have.property('del_flg');
+        res.body.should.have.property('_id');
+        res.body.name.should.equal('Nikhil');
+        res.body.email.should.equal('nikhil'+ uniqueString + '@mailinator.com');
+        res.body.dob.should.equal('24/02/1989');
+        res.body.gender.should.equal('M');
+        res.body.is_verified.should.equal(false);
+        res.body.del_flg.should.equal(false);
+        done();
+      });
+  });
 });
 
-it('should add a SINGLE user on /user POST', function(done) {
-  chai.request(server)
-    .post('/user')
-    .send({
-      'name': 'Nikhil', 
-      'email': 'nikhil123@mailinator.com', 
-      'dob': '24/02/1989',
-      'gender': 'M',
-      'is_verified': false,
-      'del_flg': false  
-    })
-    .end(function(err, res){
-      res.should.have.status(200);
-      res.should.be.json;
-      res.body.should.be.a('object');
-      res.body.should.have.property('SUCCESS');
-      res.body.SUCCESS.should.be.a('object');
-      res.body.SUCCESS.should.have.property('name');
-      res.body.SUCCESS.should.have.property('email');
-      res.body.SUCCESS.should.have.property('dob');
-      res.body.SUCCESS.should.have.property('gender');
-      res.body.SUCCESS.should.have.property('is_verified');
-      res.body.SUCCESS.should.have.property('del_flg');
-      res.body.SUCCESS.should.have.property('_id');
-      res.body.SUCCESS.name.should.equal('Nikhil');
-      res.body.SUCCESS.email.should.equal('nikhil123@mailinator.com');
-      res.body.SUCCESS.dob.should.equal('24/02/1989');
-      res.body.SUCCESS.gender.should.equal('M');
-      res.body.SUCCESS.is_verified.should.equal(false);
-      res.body.SUCCESS.del_flg.should.equal(false);
-      done();
-    });
-});
